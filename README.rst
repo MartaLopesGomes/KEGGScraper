@@ -19,14 +19,18 @@ python setup.py install
 
 4. After that the tool is ready to use.
 
-Available commends:
+Available commands:
 
 download_kos - Download all the sequences from each desired KO (KEGG Orthogly) group to a fasta file.
 
 The input can be:
+
 - KEGG pathway map ID
+
 - List of KO's IDs
+
 - List of KEGG Reaction IDs
+
 - List of EC (Enzyme commission) numbers
 
 Note: The format of the input lists must be a txt file with only one ID per line.
