@@ -27,6 +27,13 @@ Activate the virtual environment.
 source venv_KEGGScraper/bin/activate
 ```
 
+Install dependencies
+
+```bash
+pip install grequests
+pip install bs4
+```
+
 Then move to the folder where the file setup.py from the KEGGScraper tool is located.
 
 ```bash
