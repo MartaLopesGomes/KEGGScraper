@@ -21,7 +21,7 @@ Create a virtual environment to use with this tool.
 virtualenv venv_KEGGScraper
 ```
 
-Activate the virtualenvironment.
+Activate the virtual environment.
 
 ```bash
 source venv_KEGGScraper/bin/activate
