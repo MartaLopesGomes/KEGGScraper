@@ -14,7 +14,7 @@ except VersionConflict:
     print("Error: version of setuptools is too old (<38.3)!")
     sys.exit(1)
 
-with open('README.rst') as f:
+with open('README.md') as f:
     long_description = f.read()
 
 with open('requirements.txt') as f:
@@ -24,7 +24,7 @@ if __name__ == "__main__":
     setup(name='KEGGScraper',
           version='0.01',
           description='Tool to collect information in bulk from KEGG BRITE Database',
-          licence="MIT", # Check license
+          licence="MIT",
           long_description=long_description,
           author='Marta Lopes Gomes',
           author_email='martalopesgomes@hotmail.com',
