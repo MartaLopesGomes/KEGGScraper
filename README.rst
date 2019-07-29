@@ -21,13 +21,13 @@ python setup.py install
 
 Available commands:
 
-download_kos - Download all the sequences from each desired KO (KEGG Orthogly) group to a fasta file.
+download_kos - Download all the sequences from each desired KO (KEGG Orthology) group to a fasta file.
 
 The input can be:
 
 - KEGG pathway map ID
 
-- List of KO's IDs
+- List of KO IDs
 
 - List of KEGG Reaction IDs
 
