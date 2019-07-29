@@ -15,6 +15,6 @@ class MultipleRequests:
         print("Problem: {}: {}".format(request.url, exception))
 
     def async(self):
-        results = grequests.imap((grequests.get(u, stream=False) for u in self.urls), exception_handler=self.exception,
+        results = grequests.map((grequests.get(u, stream=False) for u in self.urls), exception_handler=self.exception,
                                  size=self.size)
         return results

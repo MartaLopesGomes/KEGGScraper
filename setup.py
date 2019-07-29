@@ -14,7 +14,7 @@ except VersionConflict:
     print("Error: version of setuptools is too old (<38.3)!")
     sys.exit(1)
 
-with open('README.rst') as f:
+with open('README.md') as f:
     long_description = f.read()
 
 with open('requirements.txt') as f:
