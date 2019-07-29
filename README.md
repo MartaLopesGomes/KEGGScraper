@@ -78,25 +78,25 @@ To test if the tool is working you can use the files contained in the examples f
 
 Using the tool to download all the sequences from the KO associated with the pathway with the ID map:
 
-````bash
+```bash
 download_kos -o /path/to/output/folder/ -m map map00362
 ```
 
 Using the tool to download all the sequences from the KO's listed in the file examples/kos.txt:
 
-````bash
+```bash
 download_kos -o /path/to/output/folder/ -k /path/to/KEGGScraper/examples/kos.txt
 ```
 
 Using the tool to download all the sequences from the KO's associated with the listed reactions in the file examples/reactions.txt:
 
-````bash
+```bash
 download_kos -o /path/to/output/folder/ -r /path/to/KEGGScraper/examples/reactions.txt
 ```
 
 Using the tool to download all the sequences from the KO's associated with the listed enzymes in the file examples/ecs.txt:
 
-````bash
+```bash
 download_kos -o /path/to/output/folder/ -e /path/to/KEGGScraper/examples/ecs.txt
 ```
 
