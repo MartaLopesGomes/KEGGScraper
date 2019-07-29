@@ -51,16 +51,32 @@ The tool should be ready to use.
 Usage
 =====
 
+##download_kos
+
+Download all the sequences from each desired KO (KEGG Orthology) group to a fasta file.
+
+The input can be:
+
+- KEGG pathway map ID
+
+- List of KO IDs
+
+- List of KEGG Reaction IDs
+
+- List of EC (Enzyme commission) numbers
+
+Note: The format of the input lists must be a txt file with only one ID per line.
+
+
 Run the command with the help option to see the usage and all the available options.
 
 ```bash
 download_kos -h
 ```
 
-To test if the tool is working you can use files contained in the examples folder.
+To test if the tool is working you can use the files contained in the examples folder.
 
 Using the tool to download all the sequences from the KO associated with the pathway with the ID map:
-
 
 ````bash
 download_kos -o /path/to/output/folder/ -m map map00362
@@ -84,20 +100,7 @@ Using the tool to download all the sequences from the KO's associated with the l
 download_kos -o /path/to/output/folder/ -e /path/to/KEGGScraper/examples/ecs.txt
 ```
 
-download_kos - Download all the sequences from each desired KO (KEGG Orthology) group to a fasta file.
-
-The input can be:
-
-- KEGG pathway map ID
-
-- List of KO IDs
-
-- List of KEGG Reaction IDs
-
-- List of EC (Enzyme commission) numbers
-
-Note: The format of the input lists must be a txt file with only one ID per line.
-
+Note: Run this commands may take some time and memory space.
 
 Note
 ====
