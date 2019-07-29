@@ -51,7 +51,7 @@ The tool should be ready to use.
 Usage
 =====
 
-# download_kos
+## download_kos
 
 Download all the sequences from each desired KO (KEGG Orthology) group to a fasta file.
 
