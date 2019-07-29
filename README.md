@@ -44,6 +44,12 @@ The tool should be ready to use.
 Usage
 =====
 
+Run the command with the help option to see the usage and all the avilable options.
+
+```bash 
+download_kos -h
+```
+
 download_kos - Download all the sequences from each desired KO (KEGG Orthology) group to a fasta file.
 
 The input can be:
