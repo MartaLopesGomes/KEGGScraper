@@ -30,7 +30,7 @@ soure venv_KEGGScraper/bin/activate
 Then move to the folder where the file setup.py from the KEGGScraper tool is located.
 
 ```bash
-cd /path/to/KEGGSCraper
+cd /path/to/KEGGScraper
 ```
 
 Run the command:
