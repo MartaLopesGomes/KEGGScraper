@@ -24,7 +24,7 @@ virtualenv venv_KEGGScraper
 Activate the virtualenvironment.
 
 ```bash
-soure venv_KEGGScraper/bin/activate
+source venv_KEGGScraper/bin/activate
 ```
 
 Then move to the folder where the file setup.py from the KEGGScraper tool is located.
