@@ -44,7 +44,7 @@ The tool should be ready to use.
 Usage
 =====
 
-Run the command with the help option to see the usage and all the avilable options.
+Run the command with the help option to see the usage and all the available options.
 
 ```bash 
 download_kos -h
