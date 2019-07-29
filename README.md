@@ -51,7 +51,7 @@ The tool should be ready to use.
 Usage
 =====
 
-##download_kos
+# download_kos
 
 Download all the sequences from each desired KO (KEGG Orthology) group to a fasta file.
 
@@ -100,7 +100,7 @@ Using the tool to download all the sequences from the KO's associated with the l
 download_kos -o /path/to/output/folder/ -e /path/to/KEGGScraper/examples/ecs.txt
 ```
 
-Note: Run this commands may take some time and memory space.
+Note: Running this commands may take some time and memory space.
 
 Note
 ====
