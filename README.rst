@@ -8,35 +8,35 @@ Description
 Python Tool to request information in bulk from KEGG (Kyoto Encyclopedia of Genes and Genomes) database.
 
 Installation 
-===========
+============
 
 Use the package manager pip to install virtualenv.
 
-```bash
+```
 pip install virtualenv
 ```
 
 Create a virtual environment to use with this tool.
 
-```bash
+```
 virtualenv venv_KEGGScraper
 ```
 
 Activate the virtualenvironment.
 
-```bash
+```
 soure venv_KEGGScraper/bin/activate
 ```
 
 Then move to the folder where the file setup.py from the KEGGScraper tool is located.
 
-```bash
+```
 cd /path/to/KEGGSCraper
 ```
 
 Run the command:
 
-```bash
+```
 python setup.py install 
 ```
 
