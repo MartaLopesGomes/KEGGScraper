@@ -191,7 +191,7 @@ def main(args):
         return -1
 
     _logger.info('KEGG Orthology IDs to download:')
-    _logger.info(*kos_to_download)
+    _logger.info('\t'.join(kos_to_download))
 
     total = 0
 
