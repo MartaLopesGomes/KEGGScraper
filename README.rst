@@ -2,14 +2,34 @@
 KEGGScraper
 ===========
 
-
-Add a short description here!
-
-
 Description
 ===========
 
-A longer description of your project goes here...
+Python Tool to request information in bulk from KEGG (Kyoto Encyclopedia of Genes and Genomes) database.
+
+Usage
+
+1. Download all the files
+
+2. On the shell, create a python virtual environment
+
+3. In the directory where the file setup.py is located run:
+
+python setup.py install
+
+4. After that the tool is ready to use.
+
+Available commends:
+
+download_kos - Download all the sequences from each desired KO (KEGG Orthogly) group to a fasta file.
+
+The input can be:
+- KEGG pathway map ID
+- List of KO's IDs
+- List of KEGG Reaction IDs
+- List of EC (Enzyme commission) numbers
+
+Note: The format of the input lists must be a txt file with only one ID per line.
 
 
 Note
