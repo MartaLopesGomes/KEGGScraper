@@ -236,7 +236,7 @@ def main(args):
                 text = aux.get_fastaProt(seq)
                 if text is not None:
                     f.write(text)
-                seq.close()
+                    seq.close()
     return 0
 
 
