@@ -9,7 +9,7 @@ Python Tool to request information in bulk from KEGG (Kyoto Encyclopedia of Gene
 Installation
 ============
 
-Use the package manager pip to install virtualenv.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install virtualenv.
 
 ```bash
 pip install virtualenv

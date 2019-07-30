@@ -70,7 +70,7 @@ def get_fastaProt_url(prot_id):
 def get_fasta_url(gene_id):
     URL = 'http://www.genome.jp'
     FUN = '/dbget-bin/www_bget?-f+-n+n+'
-    return URL + FUN + prot_id
+    return URL + FUN + gene_id
 
 def get_fastaProt(response):
     try:

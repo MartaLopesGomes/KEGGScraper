@@ -4,10 +4,11 @@
 """
 
 import argparse
-import sys
 import logging
 import os
+import sys
 from urllib.request import urlopen
+
 import aux
 from MultipleRequests import MultipleRequests
 
@@ -75,11 +76,15 @@ def parse_args(args):
         "-p",
         dest="protein",
         help="Use this option if you want to download amino acid sequences. (DEFAULT)",
+        action="store_const",
+        const=True
     )
     group2.add_argument(
         "-g",
         dest="gene",
         help="Use this option if you want to download nucleotide sequences.",
+        action="store_const",
+        const=True
     )
     parser.add_argument(
         "-v",
@@ -120,6 +125,8 @@ def main(args):
     else:
         size = 5
 
+    id_kos = {}
+
     if args.map:
         _logger.info('Searching for KEGG Orthology IDs associated to {}'.format(args.map))
         _logger.debug('Getting url...')
@@ -152,9 +159,11 @@ def main(args):
         _logger.debug('Parsing IDs from the returned pages...')
         for res in responses:
             _logger.debug(res)
+            reac_id = res.url.split(':')[-1]
             kos = aux.get_ids(res)
             if kos is not None:
                 kos_to_download.extend(kos)
+                id_kos[reac_id] = kos
 
 
     elif args.ec_numbers:
@@ -175,9 +184,11 @@ def main(args):
         _logger.debug('Parsing IDs from the returned pages...')
         for res in responses:
             _logger.debug(res)
+            ec_id = res.url.split(':')[-1]
             kos = aux.get_ids(res)
             if kos is not None:
                 kos_to_download.extend(kos)
+                id_kos[ec_id] = kos
 
     elif args.kos:
         _logger.info('Parsing input file to get KEGG Orthology IDs...')
@@ -237,6 +248,17 @@ def main(args):
                 if text is not None:
                     f.write(text)
                     seq.close()
+
+    # Writing report
+    _logger.info('Writing final report...')
+    if len(id_kos) > 0:
+        with open(os.path.join(args.output_dir, 'associations.txt'), 'w') as f:
+            for _id in id_kos:
+                f.write(_id + ':')
+                for ko in id_kos[_id]:
+                    f.write('\t' + ko)
+                f.write('\n')
+    _logger.info('Done!')
     return 0
 
 
