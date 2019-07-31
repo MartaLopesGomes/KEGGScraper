@@ -24,6 +24,13 @@ def check_ec(ecs):
     ec_list = [x.replace(' ', '') for x in ec_list]
     return ec_list
 
+
+def make_blocks(url_list):
+    # How many url each chunk should have
+    n = 100
+    res = [url_list[i * n:(i + 1) * n] for i in range((len(url_list) + n - 1) // n)]
+    return res
+
 def get_orthology_ids_url_from_map(pathway_id):
     URL = 'http://www.genome.jp'
     FUN = '/dbget-bin/get_linkdb?-t+orthology+path:'
