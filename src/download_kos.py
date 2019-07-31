@@ -147,6 +147,7 @@ def main(args):
             return -1
         _logger.debug('Parsing input file to get Reaction IDs...')
         reactions = aux.parser_ids(args.reactions)
+        reactions = set(reactions)
         urls = []
         _logger.debug('Calculating urls for each Reaction ID...')
         for reac in reactions:
@@ -173,6 +174,8 @@ def main(args):
             return -1
         _logger.debug('Parsing input file to get EC numbers...')
         ec_numbers = aux.parser_ids(args.ec_numbers)
+        ec_numbers = set(ec_numbers)
+        ec_numbers = aux.check_ec(ec_numbers)
         urls = []
         for ec in ec_numbers:
             _logger.debug(ec)
@@ -200,7 +203,7 @@ def main(args):
     if len(kos_to_download) < 1:
         _logger.warning('No KEGG Orthology IDs found.')
         return -1
-
+    kos_to_download = set(kos_to_download)
     _logger.info('KEGG Orthology IDs to download:')
     _logger.info('\t'.join(kos_to_download))
 

@@ -11,11 +11,18 @@ def parser_ids(file):
     with open(file, 'r') as f:
         lines = f.readlines()
     for line in lines:
-        kID = line.strip()
+        kID = line.strip().upper()
         if len(kID) > 0:
             res.append(kID)
     return res
 
+
+def check_ec(ecs):
+    ec_list = [x.lower() for x in ecs]
+    if ec_list[0][0:2] == 'ec':
+        ec_list = [x.replace('ec', '').strip() for x in ec_list]
+    ec_list = [x.replace(' ', '') for x in ec_list]
+    return ec_list
 
 def get_orthology_ids_url_from_map(pathway_id):
     URL = 'http://www.genome.jp'
