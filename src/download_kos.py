@@ -242,12 +242,8 @@ def main(args):
             else:
                 fasta_urls.append(aux.get_fastaProt_url(g_id))
         _logger.debug('Making the multiple requests...')
-        # Make chunks to not force the pool to break
-        fasta_url_chunks = aux.make_blocks(fasta_urls)
-        responses = []
-        for chunk in fasta_url_chunks:
-            fasta_requests = MultipleRequests(chunk, size)
-            responses += fasta_requests.async()
+        fasta_requests = MultipleRequests(fasta_urls, size)
+        responses = fasta_requests.async()
         _logger.info('Writing sequences on fasta file...')
         with open(os.path.join(args.output_dir, ko + '.fa'), 'w') as f:
             for seq in responses:
@@ -257,8 +253,8 @@ def main(args):
                     seq.close()
 
     # Writing report
-    _logger.info('Writing final report...')
     if len(id_kos) > 0:
+        _logger.info('Writing final report...')
         with open(os.path.join(args.output_dir, 'associations.txt'), 'w') as f:
             for _id in id_kos:
                 f.write(_id + ':')

@@ -4,7 +4,7 @@
 """
 
 import grequests
-
+import requests
 
 class MultipleRequests:
     def __init__(self, urls, size):
@@ -15,6 +15,7 @@ class MultipleRequests:
         print("Problem: {}: {}".format(request.url, exception))
 
     def async(self):
-        results = grequests.map((grequests.get(u, stream=False) for u in self.urls), exception_handler=self.exception,
-                                 size=self.size)
+        session = requests.Session()
+        results = grequests.map((grequests.get(u, stream=False, session=session) for u in self.urls),
+                                exception_handler=self.exception, size=self.size, gtimeout=60)
         return results

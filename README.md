@@ -9,6 +9,7 @@ Python Tool to request information in bulk from KEGG (Kyoto Encyclopedia of Gene
 Installation
 ============
 
+Python 3 is required.
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install virtualenv.
 
 ```bash
@@ -101,6 +102,13 @@ download_kos -o /path/to/output/folder/ -e /path/to/KEGGScraper/examples/ecs.txt
 ```
 
 Note: Running this commands may take some time and memory space.
+
+
+Output
+======
+In the output folder you will find a one fasta file for each selected KO.
+If you use one of the -e or -r options you will have another file associations.txt which indicates which kos where selected for download for each reaction/EC number.
+
 
 Note
 ====
