@@ -10,6 +10,7 @@ Installation
 ============
 
 Python 3 is required.
+
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install virtualenv.
 
 ```bash
@@ -106,8 +107,8 @@ Note: Running this commands may take some time and memory space.
 
 Output
 ======
-In the output folder you will find a one fasta file for each selected KO.
-If you use one of the -e or -r options you will have another file associations.txt which indicates which kos where selected for download for each reaction/EC number.
+In the output folder you will find one fasta file for each selected KO.
+If you use one of the -e or -r options you will have another file, associations.txt, which indicates which kos where selected for download for each reaction/EC number.
 
 
 Note
