@@ -4,6 +4,7 @@
 """
 
 import argparse
+import json
 import logging
 import os
 import sys
@@ -206,6 +207,32 @@ def main(args):
     kos_to_download = set(kos_to_download)
     _logger.info('KEGG Orthology IDs to download:')
     _logger.info('\t'.join(kos_to_download))
+
+    _logger.info('Creating info table...')
+    info = {}
+    # Not the most efficient way
+    #   to change:
+    #       - do not ask for associations already gotten (between rn and ko)
+    #       - adapt to make multiple requests
+    for ko in kos_to_download:
+        info[ko] = []
+        ko_name = aux.get_ko_name(urlopen(aux.get_ko_url(ko))).strip()
+        rns = aux.get_ids(urlopen(aux.get_rn_url_from_ko(ko)))
+        for rn in rns:
+            if rn is not None:
+                enzymes = aux.get_ids(urlopen(aux.get_ec_url_from_rn(rn)))
+                for enz in enzymes:
+                    if enz is not None:
+                        info[ko].append([ko, ko_name, enz, rn])
+    # store info in json file
+    with open(os.path.join(args.output_dir, 'info_db.json'), 'w') as handle:
+        json.dump(info, handle)
+    # store info in csv file
+    with open(os.path.join(args.output_dir, 'info_db.csv'), 'w') as f:
+        f.write('KO;KO name;Ec number;Reaction')
+        for ko in info:
+            for line in info[ko]:
+                f.write('\n' + ';'.join(line))
 
     total = 0
 

@@ -1,4 +1,4 @@
-KEGGScraper
+OrtScraper
 ===========
 
 Description
@@ -20,13 +20,13 @@ pip install virtualenv
 Create a virtual environment to use with this tool.
 
 ```bash
-virtualenv venv_KEGGScraper
+virtualenv venv_OrtScraper
 ```
 
 Activate the virtual environment.
 
 ```bash
-source venv_KEGGScraper/bin/activate
+source venv_OrtScraper/bin/activate
 ```
 
 Install dependencies
@@ -36,10 +36,10 @@ pip install grequests
 pip install bs4
 ```
 
-Then move to the folder where the file setup.py from the KEGGScraper tool is located.
+Then move to the folder where the file setup.py from the OrtScraper tool is located.
 
 ```bash
-cd /path/to/KEGGScraper
+cd /path/to/OrtScraper
 ```
 
 Run the command:
@@ -55,7 +55,7 @@ Usage
 
 ## download_kos
 
-Download all the sequences from each desired KO (KEGG Orthology) group to a fasta file.
+Download all the sequences from each desired KO (KEGG Orthology) group to a FASTA file.
 
 The input can be:
 
@@ -87,19 +87,19 @@ download_kos -o /path/to/output/folder/ -m map map00362
 Using the tool to download all the sequences from the KO's listed in the file examples/kos.txt:
 
 ```bash
-download_kos -o /path/to/output/folder/ -k /path/to/KEGGScraper/examples/kos.txt
+download_kos -o /path/to/output/folder/ -k /path/to/OrtScraper/examples/kos.txt
 ```
 
 Using the tool to download all the sequences from the KO's associated with the listed reactions in the file examples/reactions.txt:
 
 ```bash
-download_kos -o /path/to/output/folder/ -r /path/to/KEGGScraper/examples/reactions.txt
+download_kos -o /path/to/output/folder/ -r /path/to/OrtScraper/examples/reactions.txt
 ```
 
 Using the tool to download all the sequences from the KO's associated with the listed enzymes in the file examples/ecs.txt:
 
 ```bash
-download_kos -o /path/to/output/folder/ -e /path/to/KEGGScraper/examples/ecs.txt
+download_kos -o /path/to/output/folder/ -e /path/to/OrtScraper/examples/ecs.txt
 ```
 
 Note: Running this commands may take some time and memory space.
@@ -107,12 +107,7 @@ Note: Running this commands may take some time and memory space.
 
 Output
 ======
-In the output folder you will find one fasta file for each selected KO.
+In the output folder you will find one FASTA file for each selected KO.
 If you use one of the -e or -r options you will have another file, associations.txt, which indicates which kos where selected for download for each reaction/EC number.
+In the same folder can be found a file info_db.csv that contains a table with information regarding the KO's that was selected to download, their name and also the EC numbers and Reactions IDs to which they are associated.
 
-
-Note
-====
-
-This project has been set up using PyScaffold 3.2.1. For details and usage
-information on PyScaffold see https://pyscaffold.org/.

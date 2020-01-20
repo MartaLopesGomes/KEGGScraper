@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-    Setup file for keggscraper.
+    Setup file for ortscraper.
 
 """
 import sys

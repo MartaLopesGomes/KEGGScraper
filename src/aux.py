@@ -31,6 +31,9 @@ def make_blocks(url_list):
     res = [url_list[i * n:(i + 1) * n] for i in range((len(url_list) + n - 1) // n)]
     return res
 
+
+# API links
+
 def get_orthology_ids_url_from_map(pathway_id):
     URL = 'http://www.genome.jp'
     FUN = '/dbget-bin/get_linkdb?-t+orthology+path:'
@@ -55,6 +58,48 @@ def get_orthology_url_from_rn(rn):
     return URL + FUN + rn
 
 
+def get_ko_url(ko):
+    URL = 'https://www.genome.jp'
+    FUN = '/dbget-bin/www_bget?ko:'
+    return URL + FUN + ko
+
+
+def get_ec_url(ec):
+    URL = 'https://www.genome.jp'
+    FUN = '/dbget-bin/www_bget?ec:'
+    return URL + FUN + ec
+
+
+def get_fastaProt_url(prot_id):
+    URL = 'http://www.genome.jp'
+    FUN = '/dbget-bin/www_bget?-f+-n+a+'
+    return URL + FUN + prot_id
+
+
+def get_fasta_url(gene_id):
+    URL = 'http://www.genome.jp'
+    FUN = '/dbget-bin/www_bget?-f+-n+n+'
+    return URL + FUN + gene_id
+
+
+def get_ec_url_from_ko(ko):
+    URL = 'https://www.genome.jp'
+    FUN = '/dbget-bin/get_linkdb?-t+enzyme+ko:'
+    return URL + FUN + ko
+
+
+def get_rn_url_from_ko(ko):
+    URL = 'https://www.genome.jp'
+    FUN = '/dbget-bin/get_linkdb?-t+rn+ko:'
+    return URL + FUN + ko
+
+
+def get_ec_url_from_rn(rn):
+    URL = 'https://www.genome.jp'
+    FUN = '/dbget-bin/get_linkdb?-t+enzyme+rn:'
+    return URL + FUN + rn
+
+
 def get_ids(response):
     try:
         html = response.text
@@ -76,19 +121,38 @@ def get_ids(response):
         return None
 
 
-def get_fastaProt_url(prot_id):
-    URL = 'http://www.genome.jp'
-    FUN = '/dbget-bin/www_bget?-f+-n+a+'
-    return URL + FUN + prot_id
-
-def get_fasta_url(gene_id):
-    URL = 'http://www.genome.jp'
-    FUN = '/dbget-bin/www_bget?-f+-n+n+'
-    return URL + FUN + gene_id
-
 def get_fastaProt(response):
     try:
         html = bs(response.text, features="html.parser")
         return html.pre.text
     except:
         return None
+
+
+def get_ko_name(response):
+    html = response.read()
+    b = bs(html, features="html.parser")
+    rows = b.findAll("tr")
+    for r in rows:
+        lines = r.find("nobr")
+        if lines:
+            n = lines.text
+            if n == 'Definition':
+                definition = r.find("td").text
+    return definition
+
+
+def get_ec_names(response):
+    names = []
+    html = response.read()
+    b = bs(html, features="html.parser")
+    rows = b.findAll("tr")
+    for r in rows:
+        lines = r.find("nobr")
+        if lines:
+            n = lines.text
+            if n == 'Name':
+                cells = r.findAll("td")
+                for cell in cells:
+                    names = [x.strip() for x in cell.text.split(';')]
+    return names
