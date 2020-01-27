@@ -10,8 +10,8 @@ import os
 import sys
 from urllib.request import urlopen
 
-import aux
 from MultipleRequests import MultipleRequests
+from aux import *
 
 # from keggscraper import __version__
 
@@ -131,11 +131,11 @@ def main(args):
     if args.map:
         _logger.info('Searching for KEGG Orthology IDs associated to {}'.format(args.map))
         _logger.debug('Getting url...')
-        url = aux.get_orthology_ids_url_from_map(args.map)
+        url = get_orthology_ids_url_from_map(args.map)
         _logger.debug('Making the request - {}'.format(url))
         response = urlopen(url)
         _logger.debug('Parsing IDs from the returned page...')
-        kos = aux.get_ids(response)
+        kos = get_ids(response)
         if kos is not None:
             kos_to_download = kos
         else:
@@ -147,13 +147,13 @@ def main(args):
             _logger.error('REACTION IDs FILE - {} does not exist.'.format(args.reactions))
             return -1
         _logger.debug('Parsing input file to get Reaction IDs...')
-        reactions = aux.parser_ids(args.reactions)
+        reactions = parser_ids(args.reactions)
         reactions = set(reactions)
         urls = []
         _logger.debug('Calculating urls for each Reaction ID...')
         for reac in reactions:
             _logger.debug(reac)
-            urls.append(aux.get_orthology_url_from_rn(reac))
+            urls.append(get_orthology_url_from_rn(reac))
         _logger.debug('Making the multiple requests...')
         r_requests = MultipleRequests(urls, size)
         responses = r_requests.async()
@@ -162,7 +162,7 @@ def main(args):
         for res in responses:
             _logger.debug(res)
             reac_id = res.url.split(':')[-1]
-            kos = aux.get_ids(res)
+            kos = get_ids(res)
             if kos is not None:
                 kos_to_download.extend(kos)
                 id_kos[reac_id] = kos
@@ -174,13 +174,13 @@ def main(args):
             _logger.error('EC NUMBERS - {} does not exist.'.format(args.ec_numbers))
             return -1
         _logger.debug('Parsing input file to get EC numbers...')
-        ec_numbers = aux.parser_ids(args.ec_numbers)
+        ec_numbers = parser_ids(args.ec_numbers)
         ec_numbers = set(ec_numbers)
-        ec_numbers = aux.check_ec(ec_numbers)
+        ec_numbers = check_ec(ec_numbers)
         urls = []
         for ec in ec_numbers:
             _logger.debug(ec)
-            urls.append(aux.get_orthology_url_from_ec(ec))
+            urls.append(get_orthology_url_from_ec(ec))
         _logger.debug('Making the multiple requests...')
         ec_requests = MultipleRequests(urls, size)
         responses = ec_requests.async()
@@ -189,7 +189,7 @@ def main(args):
         for res in responses:
             _logger.debug(res)
             ec_id = res.url.split(':')[-1]
-            kos = aux.get_ids(res)
+            kos = get_ids(res)
             if kos is not None:
                 kos_to_download.extend(kos)
                 id_kos[ec_id] = kos
@@ -199,7 +199,7 @@ def main(args):
         if not os.path.isfile(args.kos):
             _logger.error('KO IDs FILE - {} does not exist.'.format(args.kos))
             return -1
-        kos_to_download = aux.parser_ids(args.kos)
+        kos_to_download = parser_ids(args.kos)
 
     if len(kos_to_download) < 1:
         _logger.warning('No KEGG Orthology IDs found.')
@@ -216,11 +216,11 @@ def main(args):
     #       - adapt to make multiple requests
     for ko in kos_to_download:
         info[ko] = []
-        ko_name = aux.get_ko_name(urlopen(aux.get_ko_url(ko))).strip()
-        rns = aux.get_ids(urlopen(aux.get_rn_url_from_ko(ko)))
+        ko_name = get_ko_name(urlopen(get_ko_url(ko))).strip()
+        rns = get_ids(urlopen(get_rn_url_from_ko(ko)))
         for rn in rns:
             if rn is not None:
-                enzymes = aux.get_ids(urlopen(aux.get_ec_url_from_rn(rn)))
+                enzymes = get_ids(urlopen(get_ec_url_from_rn(rn)))
                 for enz in enzymes:
                     if enz is not None:
                         info[ko].append([ko, ko_name, enz, rn])
@@ -241,13 +241,13 @@ def main(args):
     multiple = {}
     _logger.debug('Calculating urls...')
     for ko in kos_to_download:
-        urls.append(aux.get_gene_ids_url(ko))
+        urls.append(get_gene_ids_url(ko))
     _logger.debug('Making the multiple requests...')
     test = MultipleRequests(urls, size)
     results = test.async()
     _logger.debug('Parsing IDs from the returned pages...')
     for res in results:
-        gene_ids = aux.get_ids(res)
+        gene_ids = get_ids(res)
         ko_name = res.url.split(':')[-1]
         _logger.debug(ko_name)
         _logger.debug(res)
@@ -265,16 +265,16 @@ def main(args):
         for g_id in multiple[ko]:
             _logger.debug(g_id)
             if args.gene:
-                fasta_urls.append(aux.get_fasta_url(g_id))
+                fasta_urls.append(get_fasta_url(g_id))
             else:
-                fasta_urls.append(aux.get_fastaProt_url(g_id))
+                fasta_urls.append(get_fastaProt_url(g_id))
         _logger.debug('Making the multiple requests...')
         fasta_requests = MultipleRequests(fasta_urls, size)
         responses = fasta_requests.async()
         _logger.info('Writing sequences on fasta file...')
         with open(os.path.join(args.output_dir, ko + '.fa'), 'w') as f:
             for seq in responses:
-                text = aux.get_fastaProt(seq)
+                text = get_fastaProt(seq)
                 if text is not None:
                     f.write(text)
                     seq.close()

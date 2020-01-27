@@ -39,6 +39,6 @@ if __name__ == "__main__":
               'console_scripts':
                   ['download_kos=src.download_kos:run'],
           },
-          # Data - see this better
+          # Data
           # package_data=[]
           )
