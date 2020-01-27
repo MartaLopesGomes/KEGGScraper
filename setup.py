@@ -21,7 +21,7 @@ with open('requirements.txt') as f:
     required = f.read().splitlines()
 
 if __name__ == "__main__":
-    setup(name='KEGGScraper',
+    setup(name='OrtScraper',
           version='0.01',
           description='Tool to collect information in bulk from KEGG BRITE Database',
           licence="MIT",
